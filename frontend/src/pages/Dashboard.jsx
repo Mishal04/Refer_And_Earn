@@ -95,24 +95,7 @@ const SkeletonCard = () => (
   </div>
 );
 
-// ─── Count-up number ────────────────────────────────────────────────────────
-
-const CountUp = ({ value = 0, duration = 0.9, prefix = "" }) => {
-  const [display, setDisplay] = useState(0);
-  const prevValue = useRef(0);
-
-  useEffect(() => {
-    const controls = animate(prevValue.current, value, {
-      duration,
-      ease: "easeOut",
-      onUpdate: (v) => setDisplay(v),
-    });
-    prevValue.current = value;
-    return () => controls.stop();
-  }, [value, duration]);
-
-  return <>{prefix}{Math.round(display).toLocaleString()}</>;
-};
+import CountUp from "../components/CountUp";
 
 // ─── Section: Stat Cards ────────────────────────────────────────────────────
 
