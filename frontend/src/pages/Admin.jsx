@@ -1342,7 +1342,6 @@ const TABS = [
   { key: "leads", label: "Leads", icon: "📋" },
   { key: "withdrawals", label: "Withdrawals", icon: "🏦" },
   { key: "leaderboard", label: "Leaderboard", icon: "🏆" },
-  { key: "messages", label: "Messages", icon: "💬" },
 ];
 
 const Admin = ({ defaultTab }) => {
