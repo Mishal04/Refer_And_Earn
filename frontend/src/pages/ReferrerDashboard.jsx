@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api/axios";
+import DisclaimerBox from "../components/DisclaimerBox";
 
 const ReferrerDashboard = () => {
   const { user, logout } = useAuth();
@@ -97,6 +98,9 @@ const ReferrerDashboard = () => {
             {message}
           </div>
         )}
+
+        {/* Payment & Referral Disclaimers */}
+        <DisclaimerBox />
 
         {/* Referral Link Card */}
         <div className="bg-white rounded-xl shadow-sm p-5 mb-6">

@@ -63,21 +63,61 @@ const getUserDashboard = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // 1. Direct (Level 1) Referrals
+    // 1. Direct (Level 1) Referrals with lead completion stats
     const level1Referrals = await User.find({ referredBy: id })
       .select('name email phone role status referralCode walletBalance createdAt')
       .sort({ createdAt: -1 });
 
+    const level1WithStats = await Promise.all(
+      level1Referrals.map(async (r) => {
+        const completedCount = await Lead.countDocuments({ referredBy: r._id, status: 'completed' });
+        const totalCount = await Lead.countDocuments({ referredBy: r._id });
+        return {
+          ...r.toObject(),
+          completedLeadsCount: completedCount,
+          totalLeadsCount: totalCount,
+          eligibilityStatus: completedCount > 0 ? 'Eligible' : 'Pending',
+          pendingReason: completedCount > 0 ? 'Client work completed' : 'Referred user has not brought completed client work yet',
+        };
+      })
+    );
+
     const level1Ids = level1Referrals.map((r) => r._id);
 
-    // 2. Secondary (Level 2) Referrals
+    // 2. Secondary (Level 2) Referrals with stats
     const level2Referrals = await User.find({ referredBy: { $in: level1Ids } })
       .select('name email phone role status referralCode walletBalance referredBy createdAt')
       .populate('referredBy', 'name email')
       .sort({ createdAt: -1 });
 
-    // 3. Leads submitted by user
+    const level2WithStats = await Promise.all(
+      level2Referrals.map(async (r) => {
+        const completedCount = await Lead.countDocuments({ referredBy: r._id, status: 'completed' });
+        const totalCount = await Lead.countDocuments({ referredBy: r._id });
+        return {
+          ...r.toObject(),
+          completedLeadsCount: completedCount,
+          totalLeadsCount: totalCount,
+          eligibilityStatus: completedCount > 0 ? 'Eligible' : 'Pending',
+          pendingReason: completedCount > 0 ? 'Client work completed' : 'Referred user has not brought completed client work yet',
+        };
+      })
+    );
+
+    // 3. Leads submitted by user with payment eligibility status
     const userLeads = await Lead.find({ referredBy: id }).sort({ createdAt: -1 });
+    const userLeadsWithEligibility = userLeads.map((l) => {
+      const isCompleted = l.status === 'completed';
+      return {
+        ...l.toObject(),
+        paymentEligibility: isCompleted ? 'Eligible' : l.status === 'rejected' ? 'Ineligible' : 'Pending',
+        paymentReason: isCompleted
+          ? 'Client work successfully completed'
+          : l.status === 'rejected'
+          ? 'Lead rejected by admin'
+          : 'Client work in progress. Payment released after work completion.',
+      };
+    });
 
     // 4. Commissions earned by user
     const userCommissions = await Commission.find({ user: id })
@@ -118,11 +158,11 @@ const getUserDashboard = async (req, res) => {
         pendingWithdrawalsAmount,
       },
       network: {
-        level1: level1Referrals,
-        level2: level2Referrals,
-        totalNetworkCount: level1Referrals.length + level2Referrals.length,
+        level1: level1WithStats,
+        level2: level2WithStats,
+        totalNetworkCount: level1WithStats.length + level2WithStats.length,
       },
-      leads: userLeads,
+      leads: userLeadsWithEligibility,
       commissions: userCommissions,
       withdrawals: userWithdrawals,
     });

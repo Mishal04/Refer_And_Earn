@@ -6,6 +6,7 @@ import api from "../api/axios";
 import Layout from "../components/Layout";
 import CountUp from "../components/CountUp";
 import NetworkVisualSmall from "../components/NetworkVisualSmall";
+import DisclaimerBox from "../components/DisclaimerBox";
 import Messages from "./Messages";
 
 // ─── Helpers & Badges ────────────────────────────────────────────────────────
@@ -715,10 +716,18 @@ const UsersTab = ({ showToast }) => {
                       ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                           {net.level1.map((r) => (
-                            <div key={r._id} className="p-3.5 rounded-xl text-xs" style={{ backgroundColor: "var(--color-bg)", border: "1.5px solid var(--color-border)" }}>
-                              <p className="font-bold" style={{ color: "var(--color-text)" }}>{r.name}</p>
+                            <div key={r._id} className="p-3.5 rounded-xl text-xs space-y-1" style={{ backgroundColor: "var(--color-bg)", border: "1.5px solid var(--color-border)" }}>
+                              <div className="flex justify-between items-start">
+                                <p className="font-bold" style={{ color: "var(--color-text)" }}>{r.name}</p>
+                                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${r.completedLeadsCount > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'}`}>
+                                  {r.eligibilityStatus || (r.completedLeadsCount > 0 ? "Eligible" : "Pending")}
+                                </span>
+                              </div>
                               <p style={{ color: "var(--color-muted)" }}>{r.email}</p>
-                              <p className="text-[11px] font-mono mt-1 text-purple-800">Code: {r.referralCode}</p>
+                              <p className="text-[11px] font-mono text-purple-800">Code: {r.referralCode}</p>
+                              <p className="text-[10px] pt-1 border-t border-stone-200 text-stone-600">
+                                {r.pendingReason || (r.completedLeadsCount > 0 ? `${r.completedLeadsCount} completed deals` : "Pending: Referred user has not brought completed client work yet")}
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -734,10 +743,18 @@ const UsersTab = ({ showToast }) => {
                       ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                           {net.level2.map((r) => (
-                            <div key={r._id} className="p-3.5 rounded-xl text-xs bg-amber-50/50" style={{ border: "1.5px solid #FCD34D" }}>
-                              <p className="font-bold text-amber-950">{r.name}</p>
+                            <div key={r._id} className="p-3.5 rounded-xl text-xs bg-amber-50/50 space-y-1" style={{ border: "1.5px solid #FCD34D" }}>
+                              <div className="flex justify-between items-start">
+                                <p className="font-bold text-amber-950">{r.name}</p>
+                                <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${r.completedLeadsCount > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'}`}>
+                                  {r.eligibilityStatus || (r.completedLeadsCount > 0 ? "Eligible" : "Pending")}
+                                </span>
+                              </div>
                               <p className="text-amber-900">{r.email}</p>
-                              <p className="text-[11px] mt-1 text-amber-800">Referred by: {r.referredBy?.name}</p>
+                              <p className="text-[11px] text-amber-800">Referred by: {r.referredBy?.name}</p>
+                              <p className="text-[10px] pt-1 border-t border-amber-200 text-amber-900">
+                                {r.pendingReason || (r.completedLeadsCount > 0 ? `${r.completedLeadsCount} completed deals` : "Pending: Referred user has not brought completed client work yet")}
+                              </p>
                             </div>
                           ))}
                         </div>
@@ -753,16 +770,21 @@ const UsersTab = ({ showToast }) => {
                       <p className="text-xs italic text-center py-6" style={{ color: "var(--color-muted)" }}>No leads submitted by this user.</p>
                     ) : (
                       d.leads?.map((l) => (
-                        <div key={l._id} className="p-3.5 rounded-xl flex items-center justify-between text-xs" style={{ backgroundColor: "var(--color-bg)", border: "1px solid var(--color-border)" }}>
+                        <div key={l._id} className="p-3.5 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs" style={{ backgroundColor: "var(--color-bg)", border: "1px solid var(--color-border)" }}>
                           <div>
-                            <p className="font-bold" style={{ color: "var(--color-text)" }}>{l.clientName}</p>
+                            <div className="flex items-center gap-2">
+                              <p className="font-bold" style={{ color: "var(--color-text)" }}>{l.clientName}</p>
+                              <Badge status={l.status} map={STATUS_BADGE} />
+                            </div>
                             <p style={{ color: "var(--color-muted)" }}>{l.clientContact} • {l.projectDetails}</p>
+                            <p className="text-[11px] mt-1 text-stone-600">
+                              Payment Eligibility: <span className="font-semibold text-purple-900">{l.paymentEligibility || (l.status === 'completed' ? 'Eligible' : 'Pending')}</span> — {l.paymentReason || (l.status === 'completed' ? 'Client work completed' : 'Client work in progress')}
+                            </p>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <span className="font-bold" style={{ color: "var(--color-primary)" }}>
+                          <div className="text-right">
+                            <span className="font-bold text-sm" style={{ color: "var(--color-primary)" }}>
                               {l.projectValue > 0 ? `Rs. ${l.projectValue.toLocaleString()}` : "No value"}
                             </span>
-                            <Badge status={l.status} map={STATUS_BADGE} />
                           </div>
                         </div>
                       ))
@@ -1414,6 +1436,9 @@ const Admin = ({ defaultTab }) => {
             Manage platform leads, process payouts, inspect network metrics, and manage users
           </p>
         </div>
+
+        {/* Payment & Referral Policy Disclaimer */}
+        <DisclaimerBox />
 
         {/* Tab Navigation */}
         <div className="flex gap-2 mb-6 flex-wrap">

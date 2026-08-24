@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import api from "../api/axios";
 import Layout from "../components/Layout";
 import NetworkVisualSmall from "../components/NetworkVisualSmall";
+import DisclaimerBox from "../components/DisclaimerBox";
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -1036,6 +1037,11 @@ const Dashboard = () => {
               </p>
             </div>
           </div>
+        </motion.div>
+
+        {/* Payment & Referral Disclaimers */}
+        <motion.div {...fadeUp(0.08)}>
+          <DisclaimerBox />
         </motion.div>
 
         {/* Stats */}
