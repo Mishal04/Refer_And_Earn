@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema(
       enum: ['admin', 'referrer', 'client'],
       default: 'referrer',
     },
+    status: {
+      type: String,
+      enum: ['active', 'inactive', 'suspended'],
+      default: 'active',
+    },
     referralCode: {
       type: String,
       unique: true,

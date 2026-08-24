@@ -977,7 +977,7 @@ const Dashboard = () => {
           {...fadeUp(0)}
           className="rounded-2xl p-6 md:p-8 mb-6 relative overflow-hidden"
           style={{
-            background: "linear-gradient(135deg, #0A3B32 0%, #0E4F43 60%, #123F35 100%)",
+            background: "linear-gradient(135deg, #1C1032 0%, #2D1B4E 60%, #22143D 100%)",
           }}
         >
           {/* Decorative network visual */}
@@ -1001,7 +1001,7 @@ const Dashboard = () => {
               <p className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: "rgba(255,255,255,0.55)" }}>
                 Wallet Balance
               </p>
-              <p className="font-display font-bold text-3xl" style={{ color: "#D9A441" }}>
+              <p className="font-display font-bold text-3xl" style={{ color: "var(--color-accent)" }}>
                 <CountUp value={walletBalance} prefix="Rs. " />
               </p>
             </div>
@@ -1026,7 +1026,7 @@ const Dashboard = () => {
                   whileTap={{ scale: 0.96 }}
                   onClick={handleCopy}
                   className="flex-shrink-0 px-3 py-2 rounded-lg text-xs font-semibold transition-colors"
-                  style={{ backgroundColor: copied ? "#065F46" : "#D9A441", color: "#fff" }}
+                  style={{ backgroundColor: copied ? "#2D1B4E" : "var(--color-accent)", color: copied ? "#fff" : "#1D1429" }}
                 >
                   {copied ? "Copied!" : "Copy"}
                 </motion.button>

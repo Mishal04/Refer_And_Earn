@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api/axios";
 
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-blue-700">Refer & Earn — Admin</h1>
+        <h1 className="text-xl font-bold text-blue-700">Apexora Referrals — Admin</h1>
         <div className="flex items-center gap-4">
           <span className="text-sm text-gray-600">Hi, {user?.name}</span>
           <button onClick={logout} className="bg-red-600 text-white px-4 py-1.5 rounded-lg text-sm">

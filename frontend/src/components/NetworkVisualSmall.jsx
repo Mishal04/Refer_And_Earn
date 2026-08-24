@@ -17,10 +17,10 @@ const links = [
  * @param {boolean} dark      - use dark-panel colors vs light-panel colors
  */
 const NetworkVisualSmall = ({ className = "w-32 h-32", opacity = 1, dark = false }) => {
-  const lineColor = dark ? "rgba(217,164,65,0.35)" : "rgba(14,79,67,0.2)";
+  const lineColor = dark ? "rgba(201,162,39,0.35)" : "rgba(45,27,78,0.2)";
   const nodeFill = dark ? "#ffffff" : "var(--color-primary)";
-  const highlightFill = "#D9A441";
-  const pulseStroke = dark ? "rgba(255,255,255,0.4)" : "rgba(14,79,67,0.25)";
+  const highlightFill = "var(--color-accent)";
+  const pulseStroke = dark ? "rgba(255,255,255,0.4)" : "rgba(45,27,78,0.25)";
 
   return (
     <div className={className} style={{ opacity }}>

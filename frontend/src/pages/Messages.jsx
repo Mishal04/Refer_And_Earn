@@ -53,8 +53,8 @@ const ConversationItem = ({ conv, isActive, onClick }) => {
         <div
           className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold shadow-sm"
           style={{
-            backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "#D9A441",
-            color: "#ffffff",
+            backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "var(--color-accent)",
+            color: isActive ? "#ffffff" : "#1D1429",
           }}
         >
           {initials}
@@ -86,7 +86,7 @@ const ConversationItem = ({ conv, isActive, onClick }) => {
         {hasUnread && !isActive && (
           <span
             className="w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold text-white shadow-sm"
-            style={{ backgroundColor: "#D9A441" }}
+            style={{ backgroundColor: "var(--color-accent)" }}
           >
             {conv.unread}
           </span>
@@ -313,7 +313,7 @@ const NewMessageModal = ({ isOpen, onClose, onSelectUser, currentUserRole }) => 
                   >
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-                      style={{ backgroundColor: contact.isSupport ? "var(--color-primary)" : "#D9A441" }}
+                      style={{ backgroundColor: contact.isSupport ? "var(--color-primary)" : "var(--color-accent)" }}
                     >
                       {initials}
                     </div>

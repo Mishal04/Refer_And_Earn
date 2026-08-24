@@ -1,7 +1,8 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
+import Logo from "../components/Logo";
 
 const nodes = [
   { x: 20, y: 30 }, { x: 55, y: 15 }, { x: 80, y: 35 },
@@ -20,7 +21,7 @@ const NetworkVisual = () => (
         key={i}
         x1={nodes[a].x} y1={nodes[a].y}
         x2={nodes[b].x} y2={nodes[b].y}
-        stroke="rgba(217,164,65,0.35)"
+        stroke="rgba(201,162,39,0.35)"
         strokeWidth="0.3"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: 1, opacity: 1 }}
@@ -32,7 +33,7 @@ const NetworkVisual = () => (
         key={i}
         cx={n.x} cy={n.y}
         r={i === 4 ? 2.6 : 1.6}
-        fill={i === 4 ? "#D9A441" : "#ffffff"}
+        fill={i === 4 ? "#C9A227" : "#ffffff"}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
@@ -44,7 +45,7 @@ const NetworkVisual = () => (
         cx={n.x} cy={n.y}
         r={1.6}
         fill="none"
-        stroke={i === 4 ? "#D9A441" : "rgba(255,255,255,0.5)"}
+        stroke={i === 4 ? "#C9A227" : "rgba(255,255,255,0.5)"}
         strokeWidth="0.3"
         initial={{ scale: 1, opacity: 0.8 }}
         animate={{ scale: 3, opacity: 0 }}
@@ -90,7 +91,7 @@ const Register = () => {
       {/* Left: animated network panel */}
       <div
         className="hidden md:flex md:w-1/2 relative overflow-hidden flex-col justify-between p-12"
-        style={{ background: "linear-gradient(160deg, #0A3B32 0%, #0E4F43 55%, #123F35 100%)" }}
+        style={{ background: "linear-gradient(160deg, #1C1032 0%, #2D1B4E 55%, #22143D 100%)" }}
       >
         <motion.div
           initial={{ opacity: 0, y: -10 }}
@@ -98,10 +99,8 @@ const Register = () => {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-2"
         >
-          <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#D9A441" }}>
-            <span className="font-display font-bold text-sm text-white">R</span>
-          </div>
-          <span className="font-display font-bold text-xl text-white">Refer & Earn</span>
+          <Logo size={36} />
+          <span className="font-display font-bold text-xl text-white">Apexora Referrals</span>
         </motion.div>
 
         <div className="absolute inset-0 flex items-center justify-center opacity-90">
@@ -134,11 +133,9 @@ const Register = () => {
           className="w-full max-w-sm"
         >
           <div className="flex items-center gap-2 mb-8 md:hidden">
-            <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "var(--color-primary)" }}>
-              <span className="text-white font-display font-bold text-sm">R</span>
-            </div>
+            <Logo size={36} />
             <span className="font-display font-bold text-xl" style={{ color: "var(--color-primary)" }}>
-              Refer & Earn
+              Apexora Referrals
             </span>
           </div>
 

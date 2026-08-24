@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const http = require('http');
@@ -9,6 +9,7 @@ const leadRoutes = require('./routes/leadRoutes');
 const withdrawalRoutes = require('./routes/withdrawalRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 const messageRoutes = require('./routes/messageRoutes');
+const userRoutes = require('./routes/userRoutes');
 const Message = require('./models/Message');
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use('/api/leads', leadRoutes);
 app.use('/api/withdrawals', withdrawalRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/users', userRoutes);
 
 const server = http.createServer(app);
 

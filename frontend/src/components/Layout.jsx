@@ -2,17 +2,13 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
+import LogoMark from "./Logo";
 
 const Logo = () => (
   <div className="flex items-center gap-2.5">
-    <div
-      className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-      style={{ backgroundColor: "#D9A441" }}
-    >
-      <span className="font-display font-bold text-sm text-white">R</span>
-    </div>
+    <LogoMark size={36} />
     <span className="font-display font-bold text-lg" style={{ color: "var(--color-text)" }}>
-      Refer &amp; Earn
+      Apexora Referrals
     </span>
   </div>
 );
