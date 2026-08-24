@@ -826,9 +826,6 @@ const UsersTab = ({ showToast }) => {
               <h2 className="font-display font-semibold text-base" style={{ color: "var(--color-text)" }}>
                 User Management Directory
               </h2>
-              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900">
-                ⭐ NEW
-              </span>
             </div>
             <p className="text-xs mt-0.5" style={{ color: "var(--color-muted)" }}>
               Inspect user profiles, network balances, and click to view full user dashboard
