@@ -6,7 +6,6 @@ import api from "../api/axios";
 import Layout from "../components/Layout";
 import CountUp from "../components/CountUp";
 import NetworkVisualSmall from "../components/NetworkVisualSmall";
-import DisclaimerBox from "../components/DisclaimerBox";
 import Messages from "./Messages";
 
 // ─── Helpers & Badges ────────────────────────────────────────────────────────
@@ -1436,9 +1435,6 @@ const Admin = ({ defaultTab }) => {
             Manage platform leads, process payouts, inspect network metrics, and manage users
           </p>
         </div>
-
-        {/* Payment & Referral Policy Disclaimer */}
-        <DisclaimerBox />
 
         {/* Tab Navigation */}
         <div className="flex gap-2 mb-6 flex-wrap">
