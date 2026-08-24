@@ -30,6 +30,14 @@ function App() {
         }
       />
       <Route
+        path="/users"
+        element={
+          <ProtectedRoute adminOnly>
+            <Admin defaultTab="users" />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/messages"
         element={
           <ProtectedRoute>

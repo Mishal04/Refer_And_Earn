@@ -54,14 +54,26 @@ const adminNav = [
       </svg>
     ),
   },
+  {
+    to: "/users",
+    label: "Users",
+    badge: "⭐ NEW",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 1 0 7.75" />
+      </svg>
+    ),
+  },
 ];
 
-const NavItem = ({ to, label, icon, onClick }) => (
+const NavItem = ({ to, label, icon, badge, onClick }) => (
   <NavLink
     to={to}
     onClick={onClick}
     className={({ isActive }) =>
-      `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
+      `flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 ${
         isActive
           ? "text-white shadow-sm"
           : "hover:text-[var(--color-primary)]"
@@ -75,8 +87,21 @@ const NavItem = ({ to, label, icon, onClick }) => (
   >
     {({ isActive }) => (
       <>
-        <span style={{ color: isActive ? "#fff" : "var(--color-muted)" }}>{icon}</span>
-        {label}
+        <div className="flex items-center gap-3">
+          <span style={{ color: isActive ? "#fff" : "var(--color-muted)" }}>{icon}</span>
+          <span>{label}</span>
+        </div>
+        {badge && (
+          <span
+            className="text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+            style={{
+              backgroundColor: isActive ? "var(--color-accent)" : "#FEF3C7",
+              color: "#92400E",
+            }}
+          >
+            {badge}
+          </span>
+        )}
       </>
     )}
   </NavLink>
@@ -114,7 +139,7 @@ const Layout = ({ children }) => {
 
         <nav className="flex flex-col gap-1 flex-1">
           {nav.map((item) => (
-            <NavItem key={item.to} to={item.to} label={item.label} icon={item.icon} />
+            <NavItem key={item.to} to={item.to} label={item.label} icon={item.icon} badge={item.badge} />
           ))}
         </nav>
 
@@ -210,6 +235,7 @@ const Layout = ({ children }) => {
                     to={item.to}
                     label={item.label}
                     icon={item.icon}
+                    badge={item.badge}
                     onClick={() => setMobileOpen(false)}
                   />
                 ))}

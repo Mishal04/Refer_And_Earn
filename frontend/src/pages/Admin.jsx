@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import api from "../api/axios";
@@ -1344,18 +1345,28 @@ const TABS = [
   { key: "leads", label: "Leads", icon: "📋" },
   { key: "withdrawals", label: "Withdrawals", icon: "🏦" },
   { key: "leaderboard", label: "Leaderboard", icon: "🏆" },
-  { key: "users", label: "Users", icon: "👤", badge: "⭐ NEW" },
   { key: "messages", label: "Messages", icon: "💬" },
 ];
 
-const Admin = () => {
-  const [tab, setTab] = useState("analytics");
+const Admin = ({ defaultTab }) => {
+  const [searchParams] = useSearchParams();
+  const initialTab = defaultTab || searchParams.get("tab") || "analytics";
+  const [tab, setTab] = useState(initialTab);
   const [leads, setLeads] = useState([]);
   const [withdrawals, setWithdrawals] = useState([]);
   const [summary, setSummary] = useState(null);
   const [topReferrers, setTopReferrers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState({ msg: "", type: "success" });
+
+  useEffect(() => {
+    if (defaultTab) {
+      setTab(defaultTab);
+    } else {
+      const qp = searchParams.get("tab");
+      if (qp) setTab(qp);
+    }
+  }, [defaultTab, searchParams]);
 
   const showToast = useCallback((msg, type = "success") => {
     setToast({ msg, type });
