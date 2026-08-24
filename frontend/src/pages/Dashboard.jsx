@@ -31,10 +31,62 @@ const WITHDRAWAL_BADGE = {
   paid:      { bg: "#D1FAE5", color: "#065F46", label: "Paid" },
 };
 
+// ─── Professional SVG Icons ──────────────────────────────────────────────────
+
+const IconLeads = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+    <path d="M9 12h6" />
+    <path d="M9 16h6" />
+  </svg>
+);
+
+const IconCheckCircle = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11.01" />
+  </svg>
+);
+
+const IconClock = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const IconCreditCard = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+    <line x1="1" y1="10" x2="23" y2="10" />
+  </svg>
+);
+
+const IconBank = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 2 7 22 7 12 2" />
+    <line x1="2" y1="17" x2="22" y2="17" />
+    <line x1="2" y1="21" x2="22" y2="21" />
+    <line x1="5" y1="7" x2="5" y2="17" />
+    <line x1="10" y1="7" x2="10" y2="17" />
+    <line x1="15" y1="7" x2="15" y2="17" />
+    <line x1="19" y1="7" x2="19" y2="17" />
+  </svg>
+);
+
+const IconWallet = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" />
+    <path d="M4 6v12c0 1.1.9 2 2 2h14v-4" />
+    <path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z" />
+  </svg>
+);
+
 const PAYMENT_METHODS = {
-  easypaisa: { label: "Easypaisa", icon: "📱" },
-  jazzcash:  { label: "JazzCash", icon: "💳" },
-  bank:      { label: "Bank Transfer", icon: "🏛️" },
+  easypaisa: { label: "Easypaisa", icon: <IconCreditCard className="w-4 h-4 text-purple-900" /> },
+  jazzcash:  { label: "JazzCash", icon: <IconCreditCard className="w-4 h-4 text-amber-700" /> },
+  bank:      { label: "Bank Transfer", icon: <IconBank className="w-4 h-4 text-blue-700" /> },
 };
 
 const maskAccountInfo = (info) => {
@@ -106,9 +158,9 @@ const StatsRow = ({ leads, loading }) => {
   const completed = leads.filter((l) => l.status === "completed").length;
 
   const stats = [
-    { label: "Total Leads", value: total, icon: "📋" },
-    { label: "Pending", value: pending, icon: "⏳" },
-    { label: "Completed", value: completed, icon: "✅" },
+    { label: "Total Leads", value: total, icon: <IconLeads className="w-5 h-5" />, bg: "bg-purple-100", color: "text-purple-900" },
+    { label: "Pending", value: pending, icon: <IconClock className="w-5 h-5" />, bg: "bg-amber-100", color: "text-amber-900" },
+    { label: "Completed", value: completed, icon: <IconCheckCircle className="w-5 h-5" />, bg: "bg-emerald-100", color: "text-emerald-900" },
   ];
 
   return (
@@ -127,7 +179,9 @@ const StatsRow = ({ leads, loading }) => {
                 border: "1.5px solid var(--color-border)",
               }}
             >
-              <p className="text-lg mb-1">{s.icon}</p>
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center mb-3 ${s.bg} ${s.color}`}>
+                {s.icon}
+              </div>
               <p className="text-2xl font-display font-bold" style={{ color: "var(--color-text)" }}>
                 <CountUp value={s.value} />
               </p>
@@ -161,7 +215,7 @@ const PaymentDetailsCard = ({ paymentDetails, onSaveSuccess, cardRef, open, onOp
   }, [paymentDetails]);
 
   const hasDetails = Boolean(paymentDetails?.method && paymentDetails?.accountInfo);
-  const currentMethodMeta = PAYMENT_METHODS[paymentDetails?.method] || { label: "Not set", icon: "💳" };
+  const currentMethodMeta = PAYMENT_METHODS[paymentDetails?.method] || { label: "Not set", icon: <IconCreditCard className="w-4 h-4" /> };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -199,7 +253,7 @@ const PaymentDetailsCard = ({ paymentDetails, onSaveSuccess, cardRef, open, onOp
             className="w-8 h-8 rounded-lg flex items-center justify-center text-sm"
             style={{ backgroundColor: "rgba(217,164,65,0.15)", color: "#9B701F" }}
           >
-            💰
+            <IconWallet className="w-4 h-4" />
           </div>
           <div>
             <h2 className="font-display font-semibold text-base" style={{ color: "var(--color-text)" }}>
@@ -234,7 +288,7 @@ const PaymentDetailsCard = ({ paymentDetails, onSaveSuccess, cardRef, open, onOp
               <div className="flex items-center justify-between p-4 rounded-xl" style={{ backgroundColor: "var(--color-bg)", border: "1.5px solid var(--color-border)" }}>
                 <div className="flex items-center gap-3.5">
                   <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center text-lg flex-shrink-0"
+                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                     style={{ backgroundColor: "var(--color-surface)", border: "1px solid var(--color-border)" }}
                   >
                     {currentMethodMeta.icon}
@@ -267,8 +321,8 @@ const PaymentDetailsCard = ({ paymentDetails, onSaveSuccess, cardRef, open, onOp
             ) : (
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl" style={{ backgroundColor: "var(--color-bg)", border: "1.5px dashed var(--color-border)" }}>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg bg-amber-50 border border-amber-200 text-amber-800">
-                    💳
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-50 border border-amber-200 text-amber-800">
+                    <IconCreditCard className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold" style={{ color: "var(--color-text)" }}>
