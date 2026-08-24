@@ -79,6 +79,73 @@ const SkeletonCard = () => (
   </div>
 );
 
+// ─── Professional SVG Icons ──────────────────────────────────────────────────
+
+const IconLeads = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+    <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+    <path d="M9 12h6" />
+    <path d="M9 16h6" />
+  </svg>
+);
+
+const IconCheckCircle = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <polyline points="22 4 12 14.01 9 11.01" />
+  </svg>
+);
+
+const IconClock = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </svg>
+);
+
+const IconTrendingUp = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+    <polyline points="17 6 23 6 23 12" />
+  </svg>
+);
+
+const IconRevenue = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="1" x2="12" y2="23" />
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+  </svg>
+);
+
+const IconAward = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="8" r="7" />
+    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+  </svg>
+);
+
+const IconUsersGroup = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+
+const IconBank = ({ className = "w-5 h-5" }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 2 7 22 7 12 2" />
+    <line x1="2" y1="17" x2="22" y2="17" />
+    <line x1="2" y1="21" x2="22" y2="21" />
+    <line x1="5" y1="7" x2="5" y2="17" />
+    <line x1="10" y1="7" x2="10" y2="17" />
+    <line x1="15" y1="7" x2="15" y2="17" />
+    <line x1="19" y1="7" x2="19" y2="17" />
+  </svg>
+);
+
 // ─── Analytics Tab with Interactive Click Cards ──────────────────────────────
 
 const SummaryCards = ({ summary, loading, leads, withdrawals, topReferrers, onRefresh, showToast }) => {
@@ -98,14 +165,14 @@ const SummaryCards = ({ summary, loading, leads, withdrawals, topReferrers, onRe
   const s = summary || {};
 
   const cards = [
-    { key: "totalLeads", label: "Total Leads", value: s.totalLeads ?? 0, icon: "📋", accent: false },
-    { key: "completedLeads", label: "Completed", value: s.completedLeads ?? 0, icon: "✅", accent: false },
-    { key: "pendingLeads", label: "Pending", value: s.pendingLeads ?? 0, icon: "⏳", accent: false },
-    { key: "conversionRate", label: "Conversion Rate", value: s.conversionRate ?? 0, icon: "📈", accent: true, suffix: "%", decimals: 1 },
-    { key: "totalRevenue", label: "Total Revenue", value: s.totalRevenue ?? 0, icon: "💰", accent: true, prefix: "Rs. " },
-    { key: "totalCommissionsPaid", label: "Commissions Paid", value: s.totalCommissionsPaid ?? 0, icon: "🏆", accent: false, prefix: "Rs. " },
-    { key: "totalReferrers", label: "Active Referrers", value: s.totalReferrers ?? 0, icon: "👥", accent: false },
-    { key: "pendingWithdrawals", label: "Pending Withdrawals", value: s.pendingWithdrawals ?? 0, icon: "🏦", accent: false },
+    { key: "totalLeads", label: "Total Leads", value: s.totalLeads ?? 0, icon: <IconLeads className="w-5 h-5" />, accent: false },
+    { key: "completedLeads", label: "Completed", value: s.completedLeads ?? 0, icon: <IconCheckCircle className="w-5 h-5" />, accent: false },
+    { key: "pendingLeads", label: "Pending", value: s.pendingLeads ?? 0, icon: <IconClock className="w-5 h-5" />, accent: false },
+    { key: "conversionRate", label: "Conversion Rate", value: s.conversionRate ?? 0, icon: <IconTrendingUp className="w-5 h-5" />, accent: true, suffix: "%", decimals: 1 },
+    { key: "totalRevenue", label: "Total Revenue", value: s.totalRevenue ?? 0, icon: <IconRevenue className="w-5 h-5" />, accent: true, prefix: "Rs. " },
+    { key: "totalCommissionsPaid", label: "Commissions Paid", value: s.totalCommissionsPaid ?? 0, icon: <IconAward className="w-5 h-5" />, accent: false, prefix: "Rs. " },
+    { key: "totalReferrers", label: "Active Referrers", value: s.totalReferrers ?? 0, icon: <IconUsersGroup className="w-5 h-5" />, accent: false },
+    { key: "pendingWithdrawals", label: "Pending Withdrawals", value: s.pendingWithdrawals ?? 0, icon: <IconBank className="w-5 h-5" />, accent: false },
   ];
 
   const handleQuickLeadStatus = async (leadId, status) => {
@@ -161,16 +228,8 @@ const SummaryCards = ({ summary, loading, leads, withdrawals, topReferrers, onRe
                   boxShadow: isSelected ? "0 0 0 4px rgba(217,119,6,0.2)" : "none",
                 }}
               >
-                <div className="flex justify-between items-start">
-                  <p className="text-xl mb-1.5">{c.icon}</p>
-                  {isSelected && (
-                    <span
-                      className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                      style={{ backgroundColor: "var(--color-accent)", color: "#1D1429" }}
-                    >
-                      Selected 🔍
-                    </span>
-                  )}
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center mb-3" style={{ backgroundColor: c.accent ? "rgba(255,255,255,0.15)" : "var(--color-bg)", color: c.accent ? "var(--color-accent)" : "var(--color-primary)" }}>
+                  {c.icon}
                 </div>
                 <p
                   className="text-2xl font-display font-bold tracking-tight"
@@ -211,7 +270,9 @@ const SummaryCards = ({ summary, loading, leads, withdrawals, topReferrers, onRe
           {/* Header */}
           <div className="px-6 py-4 flex flex-wrap items-center justify-between gap-2" style={{ borderBottom: "1.5px solid var(--color-border)" }}>
             <div className="flex items-center gap-3">
-              <span className="text-2xl">{activeCardObj.icon}</span>
+              <div className="w-9 h-9 rounded-xl bg-purple-100 text-purple-900 flex items-center justify-center flex-shrink-0">
+                {activeCardObj.icon}
+              </div>
               <div>
                 <h3 className="font-display font-bold text-base" style={{ color: "var(--color-text)" }}>
                   Detailed Breakdown: {activeCardObj.label}
@@ -1359,10 +1420,10 @@ const WithdrawalsTable = ({ withdrawals, loading, onRefresh, showToast }) => {
 // ─── Main Admin Component ─────────────────────────────────────────────────────
 
 const TABS = [
-  { key: "analytics", label: "Analytics", icon: "📊" },
-  { key: "leads", label: "Leads", icon: "📋" },
-  { key: "withdrawals", label: "Withdrawals", icon: "🏦" },
-  { key: "leaderboard", label: "Leaderboard", icon: "🏆" },
+  { key: "analytics", label: "Analytics", icon: <IconTrendingUp className="w-4 h-4" /> },
+  { key: "leads", label: "Leads", icon: <IconLeads className="w-4 h-4" /> },
+  { key: "withdrawals", label: "Withdrawals", icon: <IconBank className="w-4 h-4" /> },
+  { key: "leaderboard", label: "Leaderboard", icon: <IconAward className="w-4 h-4" /> },
 ];
 
 const Admin = ({ defaultTab }) => {
