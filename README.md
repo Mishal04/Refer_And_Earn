@@ -4,7 +4,7 @@ A modern multi-tier referral and rewards web application built with **React**, *
 
 ---
 
-## 🌟 Key Features
+## 🌟 Key Featuress
 
 - **Public Landing Page (`/`)**: High-converting landing page explaining the 2-tier commission model, interactive animated network visualization, trust points, and multi-tier rewards breakdown.
 - **Referrer Dashboard (`/dashboard`)**:
