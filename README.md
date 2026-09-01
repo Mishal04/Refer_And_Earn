@@ -29,7 +29,7 @@ A modern multi-tier referral and rewards web application built with **React**, *
 ### Frontend
 - **Framework**: React (Vite)
 - **Styling**: Tailwind CSS & Vanilla CSS Design System (Sora & Inter typography, Emerald & Gold aesthetic)
-- **Animations**: Framer Motion
+- **Animations**: Framer Motionn
 - **Networking**: Axios & Socket.io Client
 
 ### Backend
