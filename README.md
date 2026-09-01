@@ -1,4 +1,4 @@
-# Refer & Earn Platform 🚀
+# Refer & Earn Platform 🚀 
 
 A modern multi-tier referral and rewards web application built with **React**, **Node.js/Express**, **MongoDB**, and **Socket.io**.
 
