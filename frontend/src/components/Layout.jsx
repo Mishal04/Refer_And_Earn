@@ -4,14 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import LogoMark from "./Logo";
 
-const Logo = () => (
-  <div className="flex items-center gap-2.5">
-    <LogoMark size={36} />
-    <span className="font-display font-bold text-lg" style={{ color: "var(--color-text)" }}>
-      Apexora Referrals
-    </span>
-  </div>
-);
+const Logo = () => <LogoMark height={56} />;
 
 const referrerNav = [
   {

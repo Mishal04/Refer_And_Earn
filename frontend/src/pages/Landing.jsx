@@ -384,11 +384,8 @@ const Landing = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <Logo size={36} className="transition-transform group-hover:scale-105" />
-            <span className="font-display font-bold text-xl" style={{ color: "var(--color-primary)" }}>
-              Apexora Referrals
-            </span>
+          <Link to="/" className="flex items-center group">
+            <Logo height={56} className="transition-transform group-hover:scale-105" />
           </Link>
 
           {/* Nav Actions */}
@@ -995,11 +992,8 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo */}
-            <div className="flex items-center gap-2.5">
-              <Logo size={28} />
-              <span className="font-display font-bold text-lg" style={{ color: "var(--color-primary)" }}>
-                Apexora Referrals
-              </span>
+            <div className="flex items-center">
+              <Logo height={44} />
             </div>
 
             {/* Links */}

@@ -97,10 +97,11 @@ const Register = () => {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-2"
+          className="flex items-center"
         >
-          <Logo size={36} />
-          <span className="font-display font-bold text-xl text-white">Apexora Referrals</span>
+          <div style={{ backgroundColor: "rgba(255,255,255,0.92)", borderRadius: "8px", padding: "6px 10px", display: "inline-block" }}>
+            <Logo height={56} />
+          </div>
         </motion.div>
 
         <div className="absolute inset-0 flex items-center justify-center opacity-90">
@@ -132,11 +133,8 @@ const Register = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="w-full max-w-sm"
         >
-          <div className="flex items-center gap-2 mb-8 md:hidden">
-            <Logo size={36} />
-            <span className="font-display font-bold text-xl" style={{ color: "var(--color-primary)" }}>
-              Apexora Referrals
-            </span>
+          <div className="flex items-center mb-8 md:hidden">
+            <Logo height={56} />
           </div>
 
           <h2 className="font-display font-bold text-3xl mb-1" style={{ color: "var(--color-text)" }}>
